@@ -49,3 +49,79 @@ melb |>
     mean_distance = mean(Distance, na.rm = TRUE)
   )
 ```
+## Graphical Summaries
+
+```{r}
+ggplot(melb, aes(x = Price)) +
+  geom_histogram(bins = 30) +
+  labs(
+    title = "Distribution of Melbourne Housing Prices",
+    x = "Price",
+    y = "Number of Properties"
+  )
+```
+
+```{r}
+ggplot(melb, aes(x = Type, y = Price, fill = Type)) +
+  geom_boxplot() +
+  labs(
+    title = "Housing Prices by Property Type",
+    x = "Property Type",
+    y = "Price",
+    fill = "Property Type"
+  )
+```
+
+```{r}
+ggplot(melb, aes(x = Distance, y = Price, color = Type)) +
+  geom_point(alpha = 0.4) +
+  labs(
+    title = "Housing Price vs. Distance from Melbourne CBD",
+    x = "Distance from CBD (km)",
+    y = "Price",
+    color = "Property Type"
+  )
+```
+
+```{r}
+ggplot(melb, aes(x = Regionname, fill = Type)) +
+  geom_bar(position = "dodge") +
+  labs(
+    title = "Property Types by Region",
+    x = "Region",
+    y = "Number of Properties",
+    fill = "Property Type"
+  ) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+```{r}
+ggplot(melb, aes(x = Price, fill = Type)) +
+  geom_histogram(bins = 30) +
+  facet_wrap(~ Regionname) +
+  labs(
+    title = "Housing Price Distributions by Region",
+    x = "Price",
+    y = "Number of Properties",
+    fill = "Property Type"
+  )
+```
+
+```{r}
+melb |>
+  filter(!is.na(Regionname)) |>
+  group_by(Regionname, Type) |>
+  summarize(
+    mean_price = mean(Price, na.rm = TRUE),
+    .groups = "drop"
+  ) |>
+  ggplot(aes(x = Type, y = Regionname, fill = mean_price)) +
+  geom_tile() +
+  labs(
+    title = "Average Housing Price by Region and Property Type",
+    x = "Property Type",
+    y = "Region",
+    fill = "Average Price"
+  )
+```
+
