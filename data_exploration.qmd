@@ -1,0 +1,51 @@
+---
+title: "Melbourne Housing Data Exploration"
+format: html
+editor: visual
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+library(tidyverse)
+
+melb <- read_csv("melb_data.csv")
+```
+
+## Looking at the Data
+
+```{r}
+glimpse(melb)
+```
+
+## Categorical Variable Summaries
+
+```{r}
+table(melb$Type)
+```
+
+```{r}
+table(melb$Type, melb$Regionname)
+```
+
+## Numerical Summaries
+
+```{r}
+melb |>
+  group_by(Type) |>
+  summarize(
+    mean_price = mean(Price, na.rm = TRUE),
+    median_price = median(Price, na.rm = TRUE),
+    sd_price = sd(Price, na.rm = TRUE)
+  )
+```
+```{r}
+melb |>
+  group_by(Regionname) |>
+  summarize(
+    mean_price = mean(Price, na.rm = TRUE),
+    median_price = median(Price, na.rm = TRUE),
+    mean_distance = mean(Distance, na.rm = TRUE)
+  )
+```
