@@ -68,7 +68,50 @@ ui <- fluidPage(
     ),
     mainPanel(
       tabsetPanel(
-        tabPanel("About"),
+        tabPanel(
+          "About",
+          h2("About the Melbourne Housing Explorer"),
+          
+          p(
+            "This app allows users to explore housing data from Melbourne, Australia.
+    Users can filter the data by property type, region, and two numerical
+    variables to explore different characteristics of the housing market."
+          ),
+          
+          h3("About the Data"),
+          
+          p(
+            "The dataset contains information about residential properties in Melbourne,
+  Australia, including property prices, property types, number of rooms,
+  distance from the city center, land size, and geographic region."
+          ),
+          
+          p(
+            "Source: ",
+            a(
+              "Melbourne Housing Market dataset on Kaggle",
+              href = "https://www.kaggle.com/datasets/anthonypino/melbourne-housing-market",
+              target = "_blank"
+            )
+          ),
+          
+          h3("Using the App"),
+          
+          p(
+            "Use the sidebar to select property types and regions, choose two numerical
+    variables and their ranges, and then click Apply Filters. The Data Download
+    tab displays the filtered data and allows it to be downloaded as a CSV file.
+    The Data Exploration tab provides additional summaries and visualizations
+    of the selected data."
+          )
+        ),
+        h3("Melbourne, Australia"),
+        
+        img(
+          src = "melbourne.jpg",
+          width = "100%"
+        ),
+        
         tabPanel(
           "Data Download",
           br(),
