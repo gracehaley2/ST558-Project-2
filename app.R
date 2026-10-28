@@ -107,10 +107,7 @@ ui <- fluidPage(
           
           h3("Melbourne, Australia"),
           
-          img(
-            src = "melbourne.jpg",
-            width = "100%"
-          )
+          img(src = "melbourne.jpg", width = "100%")
         ),
         
         tabPanel(
@@ -275,7 +272,9 @@ ui <- fluidPage(
             
             br(),
             
-            plotOutput("exploration_plot", height = "500px")
+            shinycssloaders::withSpinner(
+              plotOutput("exploration_plot", height = "500px")
+            )
           )
         )
       )
